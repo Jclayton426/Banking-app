@@ -1,1 +1,33 @@
 
+public class Account {
+
+	protected double balance;
+	protected String account;
+
+	public void doWithdraw(double amount) {
+		balance = balance - amount;
+	}
+
+	public void doDeposit(double amount) {
+		balance = balance + amount;
+
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
+}
+
