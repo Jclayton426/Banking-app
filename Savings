@@ -1,0 +1,38 @@
+public class Savings extends Account {
+	protected double serviceFee;
+	protected double annualInterestRate;
+	protected double minBalance;
+
+	Savings(double balance, String account) {
+		setBalance(balance);
+		setAccount(account);
+		setMinBalance(200);
+		setServiceFee(25);
+		setAnnualInterestRate(.06);
+	}
+
+	public double getServiceFee() {
+		return serviceFee;
+	}
+
+	public void setServiceFee(double serviceFee) {
+		this.serviceFee = serviceFee;
+	}
+
+	public double getAnnualInterestRate() {
+		return annualInterestRate;
+	}
+
+	public void setAnnualInterestRate(double annualInterestRate) {
+		this.annualInterestRate = annualInterestRate;
+	}
+
+	public double getMinBalance() {
+		return minBalance;
+	}
+
+	public void setMinBalance(double minBalance) {
+		this.minBalance = minBalance;
+	}
+
+}
