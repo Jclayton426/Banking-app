@@ -1,1 +1,140 @@
+import java.util.Scanner;
+
+/**
+ * 
+ * @author pikap
+ *
+ */
+public class Bank {
+	private String name = "Class Bank";
+// creates scanner
+	Scanner sc = new Scanner(System.in);
+
+	public Bank(String name) {
+
+	}
+
+	protected void displayMenu(Checking checking, Savings savings) {
+		int option;
+		do {
+			System.out.println("===================================");
+			System.out.println(" MAIN MENU");
+			System.out.println("GCU BANK");
+			System.out.println(" " + this.name.toUpperCase());
+			System.out.println("===================================");
+			System.out.println("Pick an option: ");
+			System.out.println("---------------------");
+			System.out.println(" 1: : Deposit to Checking");
+			System.out.println(" 2: : Deposit to Savings");
+			System.out.println(" 3: : Write a Check");
+			System.out.println(" 4: : Withdraw from Savings");
+			System.out.println(" 5: : Get balance");
+			System.out.println(" 6: : Close month");
+			System.out.println("---------------------");
+			System.out.println(" 9: : Exit");
+// scanning the next user input as an integer
+			option = sc.nextInt();
+			this.actionMenu(option, checking, savings);
+		} while (option != 9);
+	}
+
+	protected void actionMenu(int option, Checking checking, Savings savings) {
+		switch (option) {
+		case 1:
+			displayDepositChecking(checking);
+			break;
+		case 2:
+			displayDepositSaving(savings);
+			break;
+		case 3:
+			displayWithdrawChecking(checking);
+			break;
+		case 4:
+			displayWithdrawSavings(savings);
+			break;
+		case 5:
+			displayBalanceScreen(checking, savings);
+			break;
+		case 6:
+			doEndMonth(checking, savings);
+			break;
+		case 9:
+			displayExitScreen();
+			break;
+		default:
+			System.out.println("INPUT ERROR");
+			break;
+		}
+	}
+
+	protected void doEndMonth(Checking checking, Savings savings) {
+		double rate = savings.getAnnualInterestRate();
+		double fee = savings.getServiceFee();
+		if (savings.getBalance() < savings.getMinBalance()) {
+			System.out.println("Savings balance is below $" + savings.getMinBalance());
+			System.out.println("A service fee of $" + fee + " has been charged to your account.");
+			savings.setBalance(savings.getBalance() - fee);
+		}
+		double amount = savings.getBalance() * rate / 12;
+		if (savings.getBalance() > 0) {
+			savings.setBalance(savings.getBalance() + amount);
+
+			System.out.println("You earned $" + amount + " on your Savings account!");
+		}
+	}
+
+	protected void displayExitScreen() {
+
+		System.out.println("You are logged out.");
+	}
+
+	protected void displayBalanceScreen(Checking checking, Savings savings) {
+		System.out.println("ACCOUNT BALANCE");
+		System.out.println("Checking: " + checking.getBalance());
+		System.out.println("Savings: " + savings.getBalance());
+	}
+
+	protected void displayWithdrawSavings(Savings savings) {
+
+		double withdrawSavings;
+		System.out.println("WITHDRAW FROM Saving" + savings.getAccount());
+		System.out.println("Your savings account balance is " + savings.getBalance());
+		System.out.println("How much will you like to deposit?");
+		withdrawSavings = sc.nextDouble();
+		savings.doWithdraw(withdrawSavings);
+		System.out.println("Your new balance is " + savings.getBalance());
+	}
+
+	protected void displayWithdrawChecking(Checking checking) {
+
+		double withdrawChecking;
+		System.out.println("WITHDRAW FROM Checking" + checking.getAccount());
+		System.out.println("Your checking account balance is " + checking.getBalance());
+		System.out.println("How much will you like to withdraw?");
+		withdrawChecking = sc.nextDouble();
+		checking.doWithdraw(withdrawChecking);
+		System.out.println("Your new balance is " + checking.getBalance());
+	}
+
+	protected void displayDepositSaving(Savings savings) {
+		double depositSavings;
+		System.out.println("DEPOSIT INTO Savings" + savings.getAccount());
+		System.out.println("Your savings account balance is " + savings.getBalance());
+		System.out.println("How much will you like to deposit?");
+		depositSavings = sc.nextDouble();
+		savings.doDeposit(depositSavings);
+		System.out.println("Your new balance is " + savings.getBalance());
+	}
+
+	protected void displayDepositChecking(Checking checking) {
+
+		double depositChecking;
+		System.out.println("DEPOSIT INTO Checking" + checking.getAccount());
+		System.out.println("Your checking account balance is " + checking.getBalance());
+		System.out.println("How much will you like to deposit?");
+		depositChecking = sc.nextDouble();
+		checking.doDeposit(depositChecking);
+		System.out.println("Your new balance is " + checking.getBalance());
+	}
+}
 
