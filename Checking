@@ -1,1 +1,28 @@
+public class Checking extends Account {
+	protected double overDraft;
+
+	public Checking(double balance, String account) {
+		setBalance(balance);
+		setAccount(account);
+		setOverDraft(45.00);
+
+	}
+
+	public void doWithdraw(double amount) {
+
+		balance = balance - amount;
+		if (balance < 0) {
+			balance = balance - (45.00);
+		}
+	}
+
+	public double getOverDraft() {
+		return overDraft;
+	}
+
+	public void setOverDraft(double overDraft) {
+		this.overDraft = overDraft;
+	}
+
+}
 
